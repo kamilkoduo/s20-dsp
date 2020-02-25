@@ -55,7 +55,7 @@ function y=solve_runge_kutta(y0,x,h,f)
     end
 endfunction
 
-function er = loc_err(exact, numerical)
+function err = loc_err(exact, numerical)
     err = zeros(exact)
     for i = 1:size(err)(2)
         err(i) = abs(exact(i)-numerical(i))    
@@ -112,26 +112,26 @@ function run_sols()
     disp("N:",N)
     exact = solve_exact(y0,x)    
     standard = solve_built_in(y0,x,F)
-    standard_e = loc_er(exact, standard)
-    standard_g = glob_er(standard_e')
+    standard_e = loc_err(exact, standard)
+    standard_g = glob_err(standard_e')
     disp("Standard ODE global error:")
     disp(standard_g)
         
     euler = solve_euler(y0,x, h, F)
-    euler_e = loc_er(exact, euler)
-    euler_g = glob_er(euler_e')
+    euler_e = loc_err(exact, euler)
+    euler_g = glob_err(euler_e')
     disp("Euler global error:")
     disp(euler_g)    
     
     euler_improved = solve_euler_improved(y0,x, h, F)
-    euler_improved_e = loc_er(exact, euler_improved)
-    euler_improved_g = glob_er(euler_improved_e')
+    euler_improved_e = loc_err(exact, euler_improved)
+    euler_improved_g = glob_err(euler_improved_e')
     disp("Euler Improved global error:")
     disp(euler_improved_g)    
     
     runge_kutta = solve_runge_kutta(y0,x, h, F)
-    runge_kutta_e = loc_er(exact, runge_kutta)
-    runge_kutta_g = glob_er(runge_kutta_e')
+    runge_kutta_e = loc_err(exact, runge_kutta)
+    runge_kutta_g = glob_err(runge_kutta_e')
     disp("Runge Kutta global error:")
     disp(runge_kutta_g)    
     
@@ -162,18 +162,18 @@ function run_errs()
         
         exact = solve_exact(y0,x)    
         sol = solve_euler(y0,x,h,F)
-        sol_e = loc_er(exact, sol)
-        sol_g = glob_er(sol_e')
+        sol_e = loc_err(exact, sol)
+        sol_g = glob_err(sol_e')
         euler_errs(i) = sol_g
 
         sol = solve_euler_improved(y0,x,h,F)
-        sol_e = loc_er(exact, sol)
-        sol_g = glob_er(sol_e')
+        sol_e = loc_err(exact, sol)
+        sol_g = glob_err(sol_e')
         euler_improved_errs(i) = sol_g
 
         sol = solve_runge_kutta(y0,x,h,F)
-        sol_e = loc_er(exact, sol)
-        sol_g = glob_er(sol_e')
+        sol_e = loc_err(exact, sol)
+        sol_g = glob_err(sol_e')
         runge_kutta_errs(i) = sol_g
     end
     glob_errs = [euler_errs',euler_improved_errs',runge_kutta_errs']
