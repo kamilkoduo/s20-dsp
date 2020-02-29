@@ -15,8 +15,8 @@ exec('ADC.sce')
 // configs
 n = 5
 fs = 50000
-quant_levels = -0.5:0.0005:0.1
-
+//quant_levels = -0.5:0.0005:0.1
+quant_levels = -1:0.0005:1
 // recorded data
 data = ADC(n, quant_levels, fs)
 
@@ -28,7 +28,7 @@ data = data + 0.1
 plot_sig(2,data)
 
 // sin noise configs
-sin_freq = 165
+sin_freq = 210
 sin_ampl = 0.1
 step_size = sin_freq*(2*%pi)/fs;
 samples = [1:size(data)(1)]*step_size;
