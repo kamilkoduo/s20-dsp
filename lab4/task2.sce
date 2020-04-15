@@ -10,6 +10,7 @@ sig = sig(1, :)
 
 
 irc_inv = 1./fft(irc)
+irc_inv(1, find(isinf(irc_inv))) = 0.
 h = ifft(irc_inv)
 
 h_len = length(h)
